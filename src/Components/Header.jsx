@@ -4,17 +4,29 @@ import Filter from './Filter';
 import useActiveFilter from '../Hooks/useActiveFilter';
 
 const Header = () => {
-  const {ModalFilter,activeFilter} =useActiveFilter()
+  const {ModalFilter,activeFilter,menuActive,Menu} =useActiveFilter()
   return (
     <>
-      <header className="bg-gray-100 py-5 px-4 border-b sticky top-0 z-10 border-gray-300 flex items-center justify-between box-border mb-6">
+      <header className="bg-gray-100 py-5 px-4 border-b sticky top-0 z-10 border-gray-300 flex items-center justify-between box-border mb-6 md:px-7">
         <div>
           <h1 className="font-semibold text-lg font-serif text-gray-700">Tienda Virtual</h1>
         </div>
         {/* Contenedor filtrado, user, menu */}
         <div className="flex items-center gap-6">
+        <nav className={menuActive?"navBar sm:block":"hidden sm:block"}>
+            <ul className="flex flex-col gap-5 sm:flex-row">
+              <li title='Loguearte' className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1">
+                <p>Login</p>
+               <i class="fa-solid fa-right-to-bracket"></i>
+              </li>
+              <li title='Compras' className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1"> 
+                <p>Purchaces</p>
+                <i class="fa-solid fa-bag-shopping"></i>
+              </li>
+            </ul>
+        </nav>
           {/* Boton filtrado */}
-          <button onClick={()=>ModalFilter()} className="border border-gray-300 px-1 flex items-center gap-2" title='Filtrar Productos'>
+          <button onClick={()=>ModalFilter()} className="border bg-gray-200 rounded-xl border-gray-300 px-3 py-1 flex items-center gap-2" title='Filtrar Productos'>
             <span className="text-sm font-medium text-gray-800">FILTER BY</span>
             {
               activeFilter
@@ -24,15 +36,16 @@ const Header = () => {
               <i className="fa-solid fa-filter transition ease-in-out duration-700 text-gray-300"></i>
             }
           </button>
-
-          <button title='Usuario'>
-            <i className="fa-solid fa-user text-Turqueza text-xl"></i>
+          
+          <button title='Carrito' className="relative">
+          <i className="fa-solid fa-cart-shopping text-lg"></i>
+          <span className="w-4 h-4 grid place-content-center absolute -top-1 -right-2 rounded-full text-white font-medium bg-green-600 text-xs">0</span>
           </button>
-          <div className="h-6 w-6  flex flex-col justify-around cursor-pointer" title='Menu'>
-            <span className="w-full h-0.5 rounded-lg bg-gray-700 block"></span>
-            <span className="w-full h-0.5 rounded-lg bg-gray-700 block"></span>
-            <span className="w-full h-0.5 rounded-lg bg-gray-700 block"></span>
-          </div>
+          <button onClick={()=>Menu()} className={menuActive?"hamburger-menu active sm:hidden":"hamburger-menu sm:hidden"} title='Menu'>
+          <span className="line bg-gray-800"></span>
+          <span className="line bg-gray-800"></span>
+          <span className="line bg-gray-800"></span>
+          </button>
         </div>
         <Filter activeFilter={activeFilter}/>
       </header>

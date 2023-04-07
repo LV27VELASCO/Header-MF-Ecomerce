@@ -59,3 +59,80 @@
         display: block;
     }
 }
+
+.hamburger-menu {
+    width: 25px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .line {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  
+  .line:nth-child(1) {
+    top: 0;
+  }
+  
+  .line:nth-child(2) {
+    top: 8px;
+  }
+  
+  .line:nth-child(3) {
+    top: 16px;
+  }
+  
+  .hamburger-menu.active {
+    transform: rotate(180deg);
+  }
+  
+  .hamburger-menu.active .line:nth-child(1) {
+    transform: rotate(45deg);
+    top: 8px;
+  }
+  
+  .hamburger-menu.active .line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-menu.active .line:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 8px;
+  }
+
+  .navBar{
+    display: block;
+  }
+
+  @media (max-width: 640px) { 
+    .navBar{
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(250, 247, 247);
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      top:4.9rem;
+      right: 1rem;
+      animation-name: menu;
+      animation-duration: 35ms;
+      animation-timing-function: ease-in-out;
+    }
+  }
+
+  @keyframes menu {
+    0%{ right: -3rem;}
+    50%{ right: -2rem;}
+    100%{ right: 1rem;}
+  }
