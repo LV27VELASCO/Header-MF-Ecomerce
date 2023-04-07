@@ -5,8 +5,8 @@ const deps = require("./package.json").dependencies;
 module.exports = (_,argv)=>{
   return{
   output: {
-    publicPath:argv.mode ==="development"
-    ?"http//localhost:8082/"
+    publicPath:argv.mode =="development"
+    ?"http://localhost:8082/"
     :"https://header-mf-ecomerce.netlify.app/",
   },
 
