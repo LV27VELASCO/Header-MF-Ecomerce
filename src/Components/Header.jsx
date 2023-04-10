@@ -7,12 +7,13 @@ import {Outlet,useNavigate} from "react-router-dom"
 const Header = () => {
   const {ModalFilter,activeFilter,menuActive,Menu} =useActiveFilter();
   const navigate =useNavigate()
+  const toHome=()=>navigate('/')
   const toLogin=()=>navigate('/login')
   const toPurchases=()=>navigate('/purchases')
   return (
     <>
-      <header className="bg-gray-100 py-5 px-4 border-b sticky top-0 z-10 border-gray-300 flex items-center justify-between box-border mb-6 md:px-7">
-        <div>
+      <header className="bg-gray-100 py-5 px-4 border-b sticky top-0 z-20 border-gray-300 flex items-center justify-between box-border md:px-7">
+        <div onClick={toHome} className="cursor-pointer">
           <h1 className="font-semibold text-lg font-serif text-gray-700">Tienda Virtual</h1>
         </div>
         {/* Contenedor filtrado, user, menu */}
@@ -53,6 +54,7 @@ const Header = () => {
         </div>
         <Filter activeFilter={activeFilter}/>
       </header>
+      <div className="h-6 w-full bg-white"></div>
       <Outlet/>
     </>
     
