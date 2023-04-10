@@ -2,9 +2,13 @@ import React from 'react';
 import "../styles/header.css"
 import Filter from './Filter';
 import useActiveFilter from '../Hooks/useActiveFilter';
+import {Outlet,useNavigate} from "react-router-dom"
 
 const Header = () => {
-  const {ModalFilter,activeFilter,menuActive,Menu} =useActiveFilter()
+  const {ModalFilter,activeFilter,menuActive,Menu} =useActiveFilter();
+  const navigate =useNavigate()
+  const toLogin=()=>navigate('/login')
+  const toPurchases=()=>navigate('/purchases')
   return (
     <>
       <header className="bg-gray-100 py-5 px-4 border-b sticky top-0 z-10 border-gray-300 flex items-center justify-between box-border mb-6 md:px-7">
@@ -15,13 +19,13 @@ const Header = () => {
         <div className="flex items-center gap-6">
         <nav className={menuActive?"navBar sm:block":"hidden sm:block"}>
             <ul className="flex flex-col gap-5 sm:flex-row">
-              <li title='Loguearte' className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1">
+              <li onClick={toLogin} title='Loguearte' className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1">
                 <p>Login</p>
-               <i class="fa-solid fa-right-to-bracket"></i>
+               <i className="fa-solid fa-right-to-bracket"></i>
               </li>
-              <li title='Compras' className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1"> 
-                <p>Purchaces</p>
-                <i class="fa-solid fa-bag-shopping"></i>
+              <li title='Compras' onClick={toPurchases} className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center gap-1"> 
+                <p>Purchases</p>
+                <i className="fa-solid fa-bag-shopping"></i>
               </li>
             </ul>
         </nav>
@@ -49,6 +53,7 @@ const Header = () => {
         </div>
         <Filter activeFilter={activeFilter}/>
       </header>
+      <Outlet/>
     </>
     
   )

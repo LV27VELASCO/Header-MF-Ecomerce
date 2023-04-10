@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./styles/header.css";
 import Container from "./Components/Container";
+import { HashRouter} from "react-router-dom"
 
 const App = () => {
   
@@ -13,4 +14,8 @@ const App = () => {
   </Container>
   </div>
 )};
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+  <HashRouter>
+    <App />
+  </HashRouter>
+, document.getElementById("app"));
