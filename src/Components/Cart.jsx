@@ -3,7 +3,10 @@ import {useNavigate} from "react-router-dom"
 
 const Cart = ({ product }) => {
   const numberItem=product.length;
-  console.log(numberItem)
+  const subtotal = product.reduce((acc, curr) => {
+    return acc + curr.quantity * parseFloat(curr.product.price);
+  }, 0);
+  
   const navigate =useNavigate()
   const toHome=()=>navigate('/')
   return (
@@ -52,7 +55,7 @@ const Cart = ({ product }) => {
             </div>
             <div className="pt-1 mt-3 border-gray-500 pb-4 border-t-2">
               <span className="text-gray-600 text-xs">{numberItem} item(s) selected</span>
-              <h3 className="font-semibold">SUBTOTAL: $2940.00</h3>
+              <h3 className="font-semibold">SUBTOTAL: ${subtotal}</h3>
             </div>
           </>
         )
