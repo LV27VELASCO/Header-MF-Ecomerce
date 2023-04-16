@@ -3,9 +3,10 @@ import "../styles/header.css"
 import Filter from './Filter';
 import useActiveFilter from '../Hooks/useActiveFilter';
 import {Outlet,useNavigate} from "react-router-dom"
+import Cart from './Cart';
 
-const Header = () => {
-  const {ModalFilter,activeFilter,menuActive,Menu} =useActiveFilter();
+const Header = ({product}) => {
+  const {ModalFilter,activeFilter,menuActive,Menu,activeCard,CardActive} =useActiveFilter();
   const navigate =useNavigate()
   const toHome=()=>navigate('/')
   const toLogin=()=>navigate('/login')
@@ -42,7 +43,7 @@ const Header = () => {
             }
           </button>
           
-          <button title='Carrito' className="relative">
+          <button title='Carrito' className="relative" onClick={()=>CardActive()}>
           <i className="fa-solid fa-cart-shopping text-lg"></i>
           <span className="w-4 h-4 grid place-content-center absolute -top-1 -right-2 rounded-full text-white font-medium bg-green-600 text-xs">0</span>
           </button>
@@ -53,6 +54,11 @@ const Header = () => {
           </button>
         </div>
         <Filter activeFilter={activeFilter}/>
+        {
+          activeCard
+          &&
+          <Cart product={product}/>
+        }
       </header>
       <div className="h-6 w-full bg-white"></div>
       <Outlet/>

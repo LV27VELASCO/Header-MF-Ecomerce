@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const useActiveFilter = () => {
     const [activeFilter, setActiveFilter] = useState(false);
     const [menuActive, setMenuActive] = useState(false)
+    const [activeCard, setactiveCard] = useState(false)
     const ModalFilter=()=>{
         if(!activeFilter)
             setActiveFilter(true)
@@ -18,7 +19,15 @@ const useActiveFilter = () => {
             setMenuActive(false);
             }
     }
-  return {activeFilter,ModalFilter,menuActive,Menu}
+
+    const CardActive=()=>{
+        if(!activeCard)
+            setactiveCard(true)
+        else{
+            setactiveCard(false);
+            }
+    }
+  return {activeFilter,ModalFilter,menuActive,Menu,activeCard,CardActive}
 }
 
 export default useActiveFilter
