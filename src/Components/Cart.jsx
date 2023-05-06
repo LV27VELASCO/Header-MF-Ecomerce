@@ -1,8 +1,28 @@
 import React from "react";
 import {useNavigate} from "react-router-dom"
+import axios from 'axios'
 
-const Cart = ({ product }) => {
+const Cart = ({ product,addToCard }) => {
   const numberItem=product.length;
+
+  const deleteProduct=(id)=>{
+    const token=localStorage.getItem("token");
+    if(token){
+      const url=`https://e-commerce-api-v2.academlo.tech/api/v1/cart/${id}`
+      axios.delete(url,{
+        headers: {
+        Authorization: `Bearer ${token}`
+      }})
+      .then((res)=>{
+        addToCard()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+    
+  }
+
   const subtotal = product.reduce((acc, curr) => {
     return acc + curr.quantity * parseFloat(curr.product.price);
   }, 0);
@@ -35,7 +55,7 @@ const Cart = ({ product }) => {
                       className="w-full h-full bg-cover"
                       alt="Imagen producto"
                     />
-                    <div className="absolute cursor-pointer top-0 w-4 h-4 bg-red-700 flex justify-center items-center">
+                    <div onClick={()=>deleteProduct(prod.id)} className="absolute cursor-pointer top-0 w-4 h-4 bg-red-700 flex justify-center items-center">
                       <i className="fa-solid fa-xmark text-xs font-bold text-white"></i>
                     </div>
                   </div>

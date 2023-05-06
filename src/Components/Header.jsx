@@ -102,7 +102,7 @@ const Header = ({ product,addToCard }) => {
           </button>
         </div>
         <Filter activeFilter={activeFilter} />
-        {activeCard && <Cart product={product} />}
+        {activeCard && <Cart product={product} addToCard={addToCard}/>}
       </header>
       <div className="h-6 w-full bg-white"></div>
       <Outlet />
