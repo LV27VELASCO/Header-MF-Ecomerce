@@ -4,7 +4,7 @@ import Filter from "./Filter";
 import useActiveFilter from "../Hooks/useActiveFilter";
 import { Outlet, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
-import UserLogued from "./userLogued";
+import LoguedUser from "./LoguedUser";
 
 const Header = ({ product,addToCard }) => {
   const {
@@ -41,7 +41,7 @@ const Header = ({ product,addToCard }) => {
                   className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center justify-center gap-1 relative">
                   <i className="fa-solid fa-user"></i>
                 </li>
-                <UserLogued logued={logued} addToCard={addToCard}/>
+                <LoguedUser logued={logued} addToCard={addToCard}/>
               </>
                 :
                 <li

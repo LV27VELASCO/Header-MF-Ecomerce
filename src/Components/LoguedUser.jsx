@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react'
 import "../styles/header.css";
 import {useNavigate} from "react-router-dom"
 
-const UserLogued = ({logued,addToCard}) => {
-
+const LoguedUser = ({logued,addToCard}) => {
     const navigate=useNavigate()
     const logOut=()=>{
         localStorage.removeItem("token");
@@ -25,6 +24,6 @@ const UserLogued = ({logued,addToCard}) => {
     </>
       
   );
-};
+}
 
-export default UserLogued;
+export default LoguedUser
