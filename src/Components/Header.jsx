@@ -6,7 +6,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
 import UserLogued from "./userLogued";
 
-const Header = ({ product }) => {
+const Header = ({ product,addToCard }) => {
   const {
     ModalFilter,
     activeFilter,
@@ -41,7 +41,7 @@ const Header = ({ product }) => {
                   className="px-3 py-1 font-medium  bg-gray-200 rounded-xl cursor-pointer flex items-center justify-center gap-1 relative">
                   <i className="fa-solid fa-user"></i>
                 </li>
-                <UserLogued logued={logued}/>
+                <UserLogued logued={logued} addToCard={addToCard}/>
               </>
                 :
                 <li
