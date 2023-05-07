@@ -4,6 +4,10 @@ import axios from 'axios'
 
 const Cart = ({ product,addToCard }) => {
   const numberItem=product.length;
+  const navigate =useNavigate()
+  const toHome=()=>navigate('/')
+  const toPurchases=()=>navigate('/purchases')
+  const jsConfetti=new JSConfetti();
 
   const deleteProduct=(id)=>{
     const token=localStorage.getItem("token");
@@ -23,12 +27,33 @@ const Cart = ({ product,addToCard }) => {
     
   }
 
+  const Checkout=()=>{
+     const token=localStorage.getItem("token");
+     if(token){
+       const url="https://e-commerce-api-v2.academlo.tech/api/v1/purchases"
+       axios.post(url,{},{
+         headers: {
+         Authorization: `Bearer ${token}`
+       }})
+       .then((res)=>{
+         addToCard()
+         toPurchases()
+         jsConfetti.addConfetti({
+          confettiRadius: 3,
+        }
+      )
+       })
+       .catch((err)=>{
+         console.log(err)
+       })
+     }
+  }
+
   const subtotal = product.reduce((acc, curr) => {
     return acc + curr.quantity * parseFloat(curr.product.price);
   }, 0);
   
-  const navigate =useNavigate()
-  const toHome=()=>navigate('/')
+  
   return (
     <div className="w-64 right-8 top-14 absolute bg-white rounded-md">
       <div className="py-2 px-3">
@@ -85,13 +110,13 @@ const Cart = ({ product,addToCard }) => {
       product.length<1
       ? 
       (
-        <button onClick={()=>toHome} className="bg-blue-600 outline-none text-white rounded-b-md w-full text-lg font-bold px-2 py-2 hover:bg-blue-500 transition-colors duration-700 ease-in-out">
+        <button onClick={()=>toHome()} className="bg-blue-600 outline-none text-white rounded-b-md w-full text-lg font-bold px-2 py-2 hover:bg-blue-500 transition-colors duration-700 ease-in-out">
           Ver Productos<i className="fa-solid fa-arrow-right text-base pl-1"></i>
         </button>
       ) 
       : 
       (
-        <button className="bg-red-600 outline-none rounded-b-md w-full text-white text-lg font-bold px-2 py-2 hover:bg-red-500 transition-colors duration-700 ease-in-out">
+        <button onClick={()=>Checkout()} className="bg-red-600 outline-none rounded-b-md w-full text-white text-lg font-bold px-2 py-2 hover:bg-red-500 transition-colors duration-700 ease-in-out">
           Checkout <i className="fa-solid fa-arrow-right text-base pl-1"></i>
         </button>
       )}
